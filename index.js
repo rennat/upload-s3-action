@@ -48,7 +48,6 @@ function run() {
       const fileStream = fs.createReadStream(p.path);
       const params = {
         Bucket: BUCKET,
-        ACL: 'public-read',
         Body: fileStream,
         Key,
         ContentType: lookup(p.path) || 'text/plain'
