@@ -35,8 +35,7 @@ function upload(params) {
   return new Promise((resolve, reject) => {
     s3.upload(params, (err, data) => {
       if (err) {
-        core.error(`Error when uploading ${params.Bucket}/${paramas.Key} : ${err}`);
-        reject(err);
+        reject(`Error when uploading ${params.Bucket}/${params.Key} : ${err}`);
       }
       else {
         core.info(`uploaded - ${data.Key}`);
