@@ -35,7 +35,7 @@ function upload(params) {
   return new Promise((resolve, reject) => {
     s3.upload(params, (err, data) => {
       if (err) {
-        reject(`Error when uploading ${params.Bucket}/${params.Key} : ${err}`);
+        reject(`Error when uploading ${params.Bucket} ${params.Key} : ${err}`);
       }
       else {
         core.info(`uploaded - ${data.Key}`);
@@ -48,7 +48,7 @@ function upload(params) {
 function run() {
   return Promise.all(
     paths.map(p => {
-      const Key = p.path.replace(path.join(process.cwd(), SOURCE_DIR), objKey);
+      const Key = p.path.replace(path.join(process.cwd(), SOURCE_DIR), objKey).replace(/[\//][\//]+/, "/").replace(/^\//, '');
       const fileStream = fs.createReadStream(p.path);
       const params = {
         Bucket: BUCKET,
