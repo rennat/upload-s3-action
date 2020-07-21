@@ -2463,7 +2463,7 @@ function upload(params) {
 function run() {
   return Promise.all(
     paths.map(p => {
-      const Key = p.path.replace(path.join(process.cwd(), SOURCE_DIR), objKey).replace(/[\\/]+/, "/").replace(/^\//, '');
+      const Key = p.path.replace(path.join(process.cwd(), SOURCE_DIR), objKey).replace(/[\\/]+/g, "/").replace(/^\//, '');
       const fileStream = fs.createReadStream(p.path);
       const params = {
         Bucket: BUCKET,
